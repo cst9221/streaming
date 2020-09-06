@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>streaming</title>
+</head>
+<body>
+    <video id="video" width="500" height="500" controls></video>
+    <script src="https://cdn.jsdelivr.net/npm/hls.jd@latest"></script>
+    <script>
+        const video  = document.getElementById('video');
+        const videoSrc = '/videos/output.m3u8';
+
+        if (Hls.isSupported()){
+            const hls = new Hls();
+
+            hls.loadSource(videoSrc);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                video.play();
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')){
+            video.src = videoSrc;
+            video.addEventListener('loadedmetadata', () => {
+                video.play();
+            });
+        }
+    </script>
+
+</body>
+</html>
