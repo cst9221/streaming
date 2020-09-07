@@ -18,3 +18,5 @@ ffmpeg("videos/video.mp4", { timeout: 432000 })
     console.log("end");
   })
   .run();
+
+  module.exports = ffmpeg;
