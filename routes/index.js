@@ -10,14 +10,21 @@ router.get('/', function(req, res, next) {
   // res.json({ error: err})
 });
 
-router.get("/:fileName", (req, res) => {
+router.get('/view/:fileName', (req,res) => {
+    const { fileName } = req.params;
+  res.render("video", {
+    title: fileName,
+    videoSource: `../videos/${fileName}`,
+  });
+});
+
+router.get("/videos/:fileName", (req, res) => {
   const { fileName } = req.params;
   const fullPath = `./videos/${fileName}.mp4`;
   const fileStat = fs.statSync(fullPath);
   const { size } = fileStat;
   const { range } = req.headers;
-  console.log(req.params)
-  
+
   // 범위에 대한 요청이 있을 경우
   if (range) {
     // bytes= 부분을 없애고 - 단위로 문자열을 자름
@@ -38,6 +45,7 @@ router.get("/:fileName", (req, res) => {
       "Content-Type": "video/mp4",
     });
     // 스트림을 내보냄
+    console.log('1')
     stream.pipe(res);
   } else {
     // 범위에 대한 요청이 아님
@@ -46,17 +54,13 @@ router.get("/:fileName", (req, res) => {
       "Content-Type": "video/mp4",
     });
     // 스트림을 만들고 응답에 실어보냄
+    console.log('2')
     fs.createReadStream(fullPath).pipe(res);
   }
-  console.log('==============',fileName, fullPath)
   // res.end();
-  // res.render("video", {
-  //   title: fileName,
-  //   videoSource: `/videos/${fileName}`,
-  // });
 });
 
-router.get('/', (req,res) => {
+router.get('/heheheh', (req,res) => {
   res.json({id: req.params.id});
 });
 
