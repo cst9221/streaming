@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Streaming</title>
+    <link rel="stylesheet" href="/stylesheets/video.css" type="text/css">
+    <script defer src="/javascripts/camStream.js" ></script>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Video Streaming <%= title %></h1>
+    <video id="video" width="720" height="560" autuplay></video>
+  </body>
+</html>
