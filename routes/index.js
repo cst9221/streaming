@@ -1,24 +1,24 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const app = require('../app.js')
-const fs = require('fs');
-const hls = require('hls-server');
+const app = require("../app.js");
+const fs = require("fs");
+const hls = require("hls-server");
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get("/", function (req, res, next) {
+  res.render("index", { title: "Express" });
   // res.json({ error: err})
 });
 
-router.get('/view/:fileName', (req,res) => {
-    const { fileName } = req.params;
+router.get("/view/:fileName", (req, res) => {
+  const { fileName } = req.params;
   res.render("video", {
     title: fileName,
-    videoSource: `../videos/${fileName}`,
+    videoSource: `../video/${fileName}`,
   });
 });
 
-router.get("/videos/:fileName", (req, res) => {
+router.get("/video/:fileName", (req, res) => {
   const { fileName } = req.params;
   const fullPath = `./videos/${fileName}.mp4`;
   const fileStat = fs.statSync(fullPath);
@@ -45,7 +45,7 @@ router.get("/videos/:fileName", (req, res) => {
       "Content-Type": "video/mp4",
     });
     // 스트림을 내보냄
-    console.log('1')
+    console.log("1");
     stream.pipe(res);
   } else {
     // 범위에 대한 요청이 아님
@@ -54,14 +54,22 @@ router.get("/videos/:fileName", (req, res) => {
       "Content-Type": "video/mp4",
     });
     // 스트림을 만들고 응답에 실어보냄
-    console.log('2')
+    console.log("2");
     fs.createReadStream(fullPath).pipe(res);
   }
   // res.end();
 });
+router.get("/cam", (req, res) => {
+  res.render("cam", {
+    title: 'cam'
+  });
+});
 
-router.get('/heheheh', (req,res) => {
-  res.json({id: req.params.id});
+router.get("/document/:id", (req, res) => {
+  res.json({ id: req.params.id });
 });
 
 module.exports = router;
+
+// https://imkh.dev/5-nodejs-video-streaming-server/
+// https://sukth09.tistory.com/42
