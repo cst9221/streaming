@@ -8,12 +8,11 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:room", (req, res) => {
-  console.log(req.params);
   res.render("room", { roomId: req.params.room });
 });
 
-
 module.exports = router;
 
+// 서버에 저장된 영상 스트리밍 서비스하기
 // https://imkh.dev/5-nodejs-video-streaming-server/
 // https://sukth09.tistory.com/42
