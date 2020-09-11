@@ -1,4 +1,5 @@
 var video = document.querySelector("#video");
+
 function startVideo() {
   console.log(video);
   if (navigator.mediaDevices.getUserMedia) {
