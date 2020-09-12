@@ -11,6 +11,10 @@ router.get("/:room", (req, res) => {
   res.render("room", { roomId: req.params.room });
 });
 
+router.get("/list", (req, res) => {
+  res.render("roomlist");
+});
+
 module.exports = router;
 
 // 서버에 저장된 영상 스트리밍 서비스하기

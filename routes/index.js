@@ -45,7 +45,6 @@ router.get("/video/:fileName", (req, res) => {
       "Content-Type": "video/mp4",
     });
     // 스트림을 내보냄
-    console.log("1");
     stream.pipe(res);
   } else {
     // 범위에 대한 요청이 아님
@@ -54,7 +53,6 @@ router.get("/video/:fileName", (req, res) => {
       "Content-Type": "video/mp4",
     });
     // 스트림을 만들고 응답에 실어보냄
-    console.log("2");
     fs.createReadStream(fullPath).pipe(res);
   }
   // res.end();
