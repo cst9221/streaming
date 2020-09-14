@@ -6,6 +6,7 @@ const myPeer = new Peer(undefined)
   // port: "3000",
 // });
 const myVideo = document.createElement("video");
+
 myVideo.muted = true;
 const peers = {};
 
@@ -24,6 +25,7 @@ function getUserMediaDevices() {
         const video = document.createElement("video");
         call.on("stream", (userVideoStream) => {
           addVideoStream(video, userVideoStream);
+          
         });
       });
 

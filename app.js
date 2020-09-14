@@ -2,9 +2,18 @@ const express = require("express");
 const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
+// const formatMessage = require("./utils/messages");
+const {
+  userJoin,
+  getCurrentUser,
+  userLeave,
+  getRoomUsers,
+} = require("./utils/users");
 
 const indexRouter = require("./routes/index");
 const roomRouter = require("./routes/room");
+
+const PORT = 3000 || process.env.PORT;
 
 app.set('io', io)
 app.set("view engine", "ejs");
@@ -13,20 +22,26 @@ app.use(express.static("public"));
 app.use("/", indexRouter);
 app.use("/room", roomRouter);
 
+// 클라이언트 연결
 io.on("connection", (socket) => {
-  socket.on("join-room", (roomId, userId) => { // join-room요청?이 왔을때
-    console.log('server.js io.on : room - ',roomId,'| user - ', userId);
-    socket.join(roomId); // room 접속
-    socket.to(roomId).broadcast.emit("user-connected", userId); // 자신을 제외한 user들에게
+  // join-room요청?이 왔을때
+  socket.on("join-room", (roomId, userId) => { 
+    const user = userJoin(socket.id, )
+    console.log('server.js io.on : room - ',roomId,'| user - ', userId, ' socket: ',socket.id);
+    // room 접속
+    socket.join(roomId); 
+    // 자신을 제외한 user들에게
+    socket.to(roomId).broadcast.emit("user-connected", userId); 
 
-    socket.on("disconnect", () => { // 연결이 끊겼을 때
+    // 연결이 끊겼을 때
+    socket.on("disconnect", () => { 
       socket.to(roomId).broadcast.emit("user-disconneted", userId);
     });
   }); 
 });
 
-server.listen(3000, ()=>{
-  console.log('port 3000 open')
+server.listen(PORT, ()=>{
+  console.log(`${PORT} is open`)
 });
 
 // 유투브 - peerjs와 socket.io를 이용한 스트리밍 뼈대

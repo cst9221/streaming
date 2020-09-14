@@ -4,7 +4,8 @@ const fs = require("fs");
 const { v4: uuidV4 } = require("uuid");
 
 router.get("/", (req, res) => {
-  res.redirect(`/room/${uuidV4()}`);
+  res.redirect(`/room/${req.query.room}`);
+  // res.redirect(`/room/${uuidV4()}`);
 });
 
 router.get("/:room", (req, res) => {
