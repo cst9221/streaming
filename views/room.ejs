@@ -13,6 +13,7 @@
     <script defer src="/javascripts/peer.js"></script>
     <script defer src="/socket.io/socket.io.js"></script>
     <script defer src="/javascripts/script.js"></script>
+    
   </head>
   <body>
     <div class="container">
@@ -26,18 +27,21 @@
         <!-- 채팅창상단 -->
         <div class="chat-info">
           <div class="chat"></div>
-          <span>◎ 룸 인원</span>
+          <span>◎ 채팅</span>
         </div>
         <!-- 채팅창 -->
         <div class="chatting">
           <div class="chat">
-            <div class="user">을왕라: </div>
-            <div class="content"> 안녕하세요</div>
+            
           </div>
         </div>
         <!-- 채팅입력 -->
-        <div class="chat-textarea">
-          <textarea class="textarea" placeholder="메시지 보내기" rows="1"></textarea> 
+        <div class="chat-form-container">
+          <form class="chat-form">
+            <input id="msg" type="text" placeholder="메시지 보내기" required autocomplete="off"/>
+            <!-- <textarea class="textarea" placeholder="메시지 보내기" rows="1"></textarea>  -->
+            <button class="btn">보내기</button>
+          </form>
         </div>
         </div>
       </div>

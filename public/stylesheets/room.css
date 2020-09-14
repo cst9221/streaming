@@ -39,7 +39,7 @@ video {
 }
 .chat{
     display: flex;
-    
+
 }
 .chat-textarea {
     display:flex;
@@ -54,6 +54,7 @@ video {
   border: none;
   border-radius: 4px;
   resize: none;
+  overflow: hidden;
   background: #eee;
 }
 .textarea:focus {
